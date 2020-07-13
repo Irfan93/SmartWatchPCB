@@ -1,0 +1,56 @@
+Altium Designer Pick and Place Locations
+C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\Project Outputs for Free Documents\Pick Place\Pick Place for SmartWatchFinalProject.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       27/07/19
+Time:       16:53
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment    Layer       Footprint            Center-X(mil) Center-Y(mil) Rotation Description                                                                               
+U3         ""         TopLayer    DA14683              3765.000      3733.465      0        "SmartBond DA14683 Single-chip high-security Bluetooth 5 solution with expandable memory" 
+R9         5.1M       TopLayer    RES_0603_HIGH        3204.567      3302.441      90       "0603 Resistor"                                                                           
+Y2         ""         TopLayer    7M-16.000MEEQ-T      4021.653      3858.268      90       "16MHz ±10ppm Crystal 10pF 80 Ohms 4-SMD, No Lead"                                        
+Y1         ""         TopLayer    9HT11-32.768KDZB-T   3960.000      3716.023      270      "32.768kHz ±20ppm Crystal 6pF 90 kOhms 2-SMD, No Lead"                                    
+U2         ""         TopLayer    LIS3DH               4103.350      3519.681      270      "LIS3DH ACCEL 2-16G I2C/SPI 16LGA"                                                        
+U5         ""         TopLayer    BQ29700DSER          3306.929      3349.685      0        "Battery Battery Protection IC Lithium-Ion/Polymer 6-WSON (1.5x1.5)"                      
+U4         ""         TopLayer    W25Q128JVPIQ         3315.000      3720.000      180      "FLASH - NOR Memory IC 128Mb (16M x 8) SPI - Quad I/O, QPI, DTR 133MHz  8-WSON (6x5)"     
+U1         ""         TopLayer    AML130A2402A         3674.999      3384.645      360      "AML130A2402A Round 1.3" TFT Display"                                                     
+R14        "0 Ohm"    TopLayer    RES_0603_HIGH        3695.001      3165.000      360      "0603 Resistor"                                                                           
+R13        "0 Ohm"    TopLayer    RES_0603_HIGH        3695.000      3220.000      180      "0603 Resistor"                                                                           
+R12        "0.39 Ohm" TopLayer    RES_0805_HIGH        3915.000      3080.000      90       "0805 Resistor"                                                                           
+R11        10K        TopLayer    RES_0603_HIGH        3204.567      3447.559      90       "0603 Resistor"                                                                           
+R10        330        TopLayer    RES_0603_HIGH        3049.567      3555.000      180      "0603 Resistor"                                                                           
+R8         ""         TopLayer    RES_0603_HIGH        3344.567      3452.441      90       "0603 Resistor"                                                                           
+R7         2.2K       TopLayer    RES_0603_HIGH        3289.567      3450.001      90       "0603 Resistor"                                                                           
+R6         330        TopLayer    RES_0603_HIGH        3424.567      3410.000      180      "0603 Resistor"                                                                           
+R5         10K        TopLayer    RES_0603_HIGH        4047.441      3683.465      0        "0603 Resistor"                                                                           
+R4         10K        TopLayer    RES_0603_HIGH        3984.252      3508.858      270      "0603 Resistor"                                                                           
+R3         10K        TopLayer    RES_0603_HIGH        3933.071      3507.874      90       "0603 Resistor"                                                                           
+R2         0.1Ohm     TopLayer    RES_0603_HIGH        3449.567      3245.001      90       "0603 Resistor"                                                                           
+R1         10K        TopLayer    RES_0603_HIGH        3407.559      3560.000      180      "0603 Resistor"                                                                           
+Q2         ""         TopLayer    ECH8693R-TL-W        3079.567      3425.000      180      "Mosfet Array 2 N-Channel (Dual) Common Drain 24V 14A 1.4W Surface Mount SOT-28FL/ECH8"   
+Q1         ""         TopLayer    ECH8693R-TL-W        3319.567      3220.000      270      "Mosfet Array 2 N-Channel (Dual) Common Drain 24V 14A 1.4W Surface Mount SOT-28FL/ECH8"   
+P1         ""         TopLayer    800-10-002-30-507101 3765.000      3030.000      180      "2 Position Spring Mating Target Connector Surface Mount"                                 
+M1         ""         BottomLayer C0720B001F           3268.095      3866.535      150      "DC Motor Vibration, ERM 10000 RPM 3VDC"                                                  
+L1         ""         TopLayer    IND_0805_HIGH        3544.488      3524.409      270      Inductor_0805                                                                             
+D1         ""         TopLayer    ESD9B5.0ST5G         3820.001      3130.000      0        "TVS DIODE 5V SOD923"                                                                     
+C15        10uF       TopLayer    CAP_0603_HIGH        3985.000      3107.559      270      "0603 Capacitor"                                                                          
+C14        ""         TopLayer    CAP_0603_HIGH        3424.568      3350.000      360      "0603 Capacitor"                                                                          
+C13        4.7uF      TopLayer    CAP_0603_HIGH        3817.914      3544.291      270      "0603 Capacitor"                                                                          
+C12        10uF       TopLayer    CAP_0603_HIGH        3570.000      3608.465      180      "0603 Capacitor"                                                                          
+C11        10uF       TopLayer    CAP_0603_HIGH        3572.441      3713.465      180      "0603 Capacitor"                                                                          
+C10        10uF       TopLayer    CAP_0603_HIGH        3572.559      3663.465      180      "0603 Capacitor"                                                                          
+C9         4.7uF      TopLayer    CAP_0603_HIGH        3570.000      3763.465      180      "0603 Capacitor"                                                                          
+C8         4.7uF      TopLayer    CAP_0603_HIGH        3967.441      3988.465      0        "0603 Capacitor"                                                                          
+C7         1uF        TopLayer    CAP_0603_HIGH        3570.000      3818.465      180      "0603 Capacitor"                                                                          
+C6         1uF        TopLayer    CAP_0603_HIGH        3722.441      3546.260      270      "0603 Capacitor"                                                                          
+C5         ""         TopLayer    CAP_0603_HIGH        3240.000      3560.000      180      "0603 Capacitor"                                                                          
+C4         1uF        TopLayer    CAP_0603_HIGH        3675.197      3546.260      270      "0603 Capacitor"                                                                          
+C3         4.7uF      TopLayer    CAP_0603_HIGH        3769.685      3545.275      270      "0603 Capacitor"                                                                          
+C2         ""         TopLayer    CAP_0603_HIGH        4047.559      3733.465      180      "0603 Capacitor"                                                                          
+C1         ""         TopLayer    CAP_0603_HIGH        4120.000      3708.465      90       "0603 Capacitor"                                                                          
+BAT1       ""         BottomLayer RJD2430C1ST1         3353.688      3185.289      315      "Coin, 24.5mm 3.7V Lithium-Ion Battery Rechargeable (Secondary) 110mAh"                   
