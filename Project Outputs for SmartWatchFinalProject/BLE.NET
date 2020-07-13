@@ -1,0 +1,146 @@
+PARTS LIST
+
+                  0.1" Header     ANT1
+                  RJD2430C1ST1    BAT1
+                  CAP_0603_HIGH   C1
+                  CAP_0603_HIGH   C2
+4.7uF             CAP_0603_HIGH   C3
+1uF               CAP_0603_HIGH   C4
+                  CAP_0603_HIGH   C5
+1uF               CAP_0603_HIGH   C6
+1uF               CAP_0603_HIGH   C7
+4.7uF             CAP_0603_HIGH   C8
+4.7uF             CAP_0603_HIGH   C9
+10uF              CAP_0603_HIGH   C10
+10uF              CAP_0603_HIGH   C11
+10uF              CAP_0603_HIGH   C12
+4.7uF             CAP_0603_HIGH   C13
+                  CAP_0603_HIGH   C14
+10uF              CAP_0603_HIGH   C15
+                  CAP_0402_MEDIUM C16
+                  CAP_0402_MEDIUM C17
+                  0.1" Pad        CLK
+                  ESD9B5.0ST5G    D1
+                  0.1" Pad        GND1
+                  0.1" Pad        GND2
+                  0.1" Pad        IO
+                  IND_0805_HIGH   L1
+                  IND_0402_MEDIUM L2
+                  C0720B001F      M1
+                  800-10-002-30-507101P1
+                  ECH8693R-TL-W   Q1
+                  ECH8693R-TL-W   Q2
+10K               RES_0603_HIGH   R1
+0.1Ohm            RES_0603_HIGH   R2
+10K               RES_0603_HIGH   R3
+10K               RES_0603_HIGH   R4
+10K               RES_0603_HIGH   R5
+330               RES_0603_HIGH   R6
+2.2K              RES_0603_HIGH   R7
+                  RES_0603_HIGH   R8
+5.1M              RES_0603_HIGH   R9
+330               RES_0603_HIGH   R10
+10K               RES_0603_HIGH   R11
+0.39 Ohm          RES_0805_HIGH   R12
+0 Ohm             RES_0603_HIGH   R13
+0 Ohm             RES_0603_HIGH   R14
+                  0.1" Pad        RST
+                  0.1" Pad        RX
+                  0.1" Pad        TX
+                  AML130A2402A    U1
+                  LIS3DH          U2
+                  DA14683         U3
+                  W25Q128JVPIQ    U4
+                  BQ29700DSER     U5
+                  9HT11-32.768KDZB-TY1
+                  7M-16.000MEEQ-T Y2
+EOS
+NET LIST
+
+NODENAME VBUS_IN          $
+    D1         2  P1         1  R12        1
+NODENAME PROT_V-          $
+    R7         1  U5         6
+NODENAME NetQ1-5          $
+    Q1         5  Q1         6  Q1         7  Q1         8
+NODENAME DOUT             $
+    Q1         4  R9         2  U5         3
+NODENAME COUT             $
+    Q1         2  R8         1  U5         2
+NODENAME BAT              $
+    C14        1  R6         2  U5         5
+NODENAME B_GND            $
+    BAT1       2  C14        2  R9         1  U5         4
+NODENAME NetR13-1         $
+    R13        1  U3       A19
+NODENAME NetU1-8          $
+    U1         8  U3        A7
+NODENAME NetU1-9          $
+    U1         9  U3       A33
+NODENAME NetU1-6          $
+    U1         6  U3       B22
+NODENAME NetU1-10         $
+    U1        10  U3       A36
+NODENAME SCL              $
+    R5         1  U3       B14
+NODENAME SDA              $
+    R4         1  U3       A20
+NODENAME NetQ2-2          $
+    Q2         2  R11        2  U3       B15
+NODENAME SOCP             $
+    Q1         1  R2         2  R7         2  R8         2  U3       A18
+NODENAME NetU2-11         $
+    U2        11  U3       A12
+NODENAME NetU2-9          $
+    U2         9  U3       A10
+NODENAME VBUS             $
+    C3         1  C15        1  R12        2  U3        B7
+NODENAME VBAT             $
+    BAT1       1  C4         1  C6         1  R6         1  U3       A13  U3        B6
+NODENAME UART_TX          $
+    TX         1  U3       B23
+NODENAME UART_RX          $
+    RX         1  U3       A35
+NODENAME SWDIO            $
+    IO         1  U3        B8
+NODENAME SWDCLK           $
+    CLK        1  U3       A14
+NODENAME RST              $
+    RST        1
+NODENAME QSPI_CS          $
+    R1         1  U3        A5  U4         1
+NODENAME PI_NETWORK       $
+    C16        2  L2         2  U3       B20
+NODENAME NetR3-2          $
+    R3         2  U3       A21
+NODENAME NetU3_A23        $
+    U3       A23  Y1         2
+NODENAME NetU3_A29        $
+    U3       A29  U3       B13  Y1         1  Y2         1
+NODENAME NetU3_A30        $
+    U3       A30  Y2         3
+NODENAME LY               $
+    L1         1  U3        B5
+NODENAME LX               $
+    L1         2  U3       A11
+NODENAME ANT              $
+    ANT1       1  C17        2  L2         1
+NODENAME 1V8P             $
+    C12        1  U3        B4
+NODENAME 1V8              $
+    C11        1  U3        A8
+NODENAME 1V4              $
+    C8         1  C9         1  U3        A6  U3       B18
+NODENAME 1V2              $
+    C10        1  U3        B3
+NODENAME NetM1-2          $
+    M1         2  R10        1
+NODENAME NetQ2-5          $
+    Q2         5  Q2         6  Q2         7  Q2         8  R10        2
+NODENAME NetR13-2         $
+    R13        2  R14        1  U1         2
+NODENAME GND              $
+    C1         2  C2         2  C3         2  C4         2  C5         2  C6         2  C7         2  C8         2  C9         2  C10        2  C11        2  C12        2  C13        2  C15        2  C16        1  C17        1  D1         1  GND1       1  GND2       1  P1         2  Q2         1  Q2         3  R2         1  R3         1  R11        1  R14        2  U1         3  U1         4  U1        15  U1        16  U2         5  U2         7  U2        10  U2        12  U3        B9  U3       B19  U3       B21  U3       GND  U4         4  Y2         2  Y2         4
+NODENAME 3V3              $
+    C1         1  C2         1  C5         1  C7         1  C13        1  M1         1  R1         2  R4         2  R5         2  U1        11  U1        12  U1        13  U1        14  U1        23  U1        24  U2         1  U2         8  U2        14  U3       A15  U3        B2  U4         8
+EOS

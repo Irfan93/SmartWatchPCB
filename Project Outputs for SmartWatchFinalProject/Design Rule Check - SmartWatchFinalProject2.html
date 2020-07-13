@@ -1,0 +1,732 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD19\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">7/25/2019</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">3:56:39 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:00</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc">C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">132</td></tr>
+</table>
+</td>
+</table><a name="ID2EWC2X0IPEQVOETAXZL2LOUDGLV1JYYZWU131CH1FDQ41WHIHR5I"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGNDTZFR5JFUHF54W232IC0UOWM3NAO3ML5NEOTCPUMRFBIJSKUMO">Clearance Constraint (Gap=0.102mm) (All),(All)</a></td>
+<td class="column2">68</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDU205XZEVKVKLRPT40PB2AMOHBDJSO3BD3RGUEWJ1UWZAKD0ZUJ">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">50</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAXH0DIBHGUVYE5ILEEM3RQYPVKSJC5MLOSPJPUOV5VZ5WDCKTV5H">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">14</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQBGBSJ1OWFB44545050KKDMD4ZXKNXPGP1V5BFKWNZAJNVUMBE">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSKDU1CY40M5BLJGIIXJ3TWJ3LO432SRU02G0OQO3KLXCAWTMBLBE">Width Constraint (Min=0.102mm) (Max=25.4mm) (Preferred=0.203mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDWJNXGAIFZA3YC11RE53XGNPQRFW4NCT2ISYE1SKMTS1B1ILY4N3K">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQ5BRVIVAGWWHN1KQTL5WOJQWLOKUJZCNGWRFISGVDXAVWB5RZGEH">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFNLW1M4Q0TYEEC4RUCBI2UK03MTJGAQBU0HUBEF4YFE33WOAGVSL">Hole To Hole Clearance (Gap=0.254mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDT0B1R4T2E3QMDUVQEEGPADEWHJZJROYDITBNSZM42N4CGHEX50SJ">Minimum Solder Mask Sliver (Gap=0mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKQYSMMN5YW2GOFHFVRBG1O24ZN4ZVNH3CPCQCUHDLW331ZTYVDNM">Silk To Solder Mask (Clearance=0mm) (Disabled)(IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWFPDYDSJEFOZP4UQZ3ZU0HXKTJX1YQOXMFYQ2WGWU13JPNVQB2JC">Silk to Silk (Clearance=0mm) (Disabled)(All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRCD0ZUAYEXASOOSJBD1DELDEBBZBSJ0OHEFQPHJ0ODNZFGGBEZ1I">Net Antennae (Tolerance=0mm) (Disabled)(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOOR1VGWMQJ5LKGZRAH3O2RZMQH1NW3F2MRX3ULIMLMLOJPFC2UBI">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">132</td>
+</tr>
+</table><br><a name="IDGNDTZFR5JFUHF54W232IC0UOWM3NAO3ML5NEOTCPUMRFBIJSKUMO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.102mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.375mil|Location2.X=3654.64mil|Location1.Y=3649.01mil|Location2.Y=3654.276mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.375mil|Location2.X=3654.64mil|Location1.Y=3649.01mil|Location2.Y=3654.276mil|Absolute=True">Clearance Constraint: (0.053mm &lt; 0.102mm) Between Pad U3-A10(92.881mm,92.605mm) on Top Layer And Track (92.16mm,92.88mm)(93.156mm,92.88mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.375mil|Location2.X=3654.64mil|Location1.Y=3659.109mil|Location2.Y=3664.375mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.375mil|Location2.X=3654.64mil|Location1.Y=3659.109mil|Location2.Y=3664.375mil|Absolute=True">Clearance Constraint: (0.054mm &lt; 0.102mm) Between Pad U3-A9(92.881mm,93.155mm) on Top Layer And Track (92.16mm,92.88mm)(93.156mm,92.88mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.407mil|Location2.X=3983.673mil|Location1.Y=3647.575mil|Location2.Y=3652.841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3978.407mil|Location2.X=3983.673mil|Location1.Y=3647.575mil|Location2.Y=3652.841mil|Absolute=True">Clearance Constraint: (0.002mm &lt; 0.102mm) Between Track (101.016mm,92.558mm)(101.016mm,93.091mm) on Top Layer And Track (101.221mm,92.715mm)(102.26mm,91.676mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3975.162mil|Location2.X=3978.838mil|Location1.Y=3648.369mil|Location2.Y=3652.046mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3975.162mil|Location2.X=3978.838mil|Location1.Y=3648.369mil|Location2.Y=3652.046mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (101.016mm,92.558mm)(101.016mm,93.091mm) on Top Layer And Track (99.939mm,92.715mm)(101.221mm,92.715mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3979.202mil|Location2.X=3982.878mil|Location1.Y=3645.265mil|Location2.Y=3648.943mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3979.202mil|Location2.X=3982.878mil|Location1.Y=3645.265mil|Location2.Y=3648.943mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (101.221mm,92.715mm)(102.26mm,91.676mm) on Top Layer And Via (101.016mm,92.558mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.162mil|Location2.X=4031.838mil|Location1.Y=3162.162mil|Location2.Y=3165.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4028.162mil|Location2.X=4031.838mil|Location1.Y=3162.162mil|Location2.Y=3165.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (101.346mm,80.366mm)(104.267mm,80.366mm) on Top Layer And Track (102.362mm,78.791mm)(102.362mm,81.661mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.162mil|Location2.X=4093.838mil|Location1.Y=3162.162mil|Location2.Y=3165.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.162mil|Location2.X=4093.838mil|Location1.Y=3162.162mil|Location2.Y=3165.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (101.346mm,80.366mm)(104.267mm,80.366mm) on Top Layer And Track (102.362mm,78.791mm)(105.385mm,81.813mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4051.343mil|Location1.Y=3616.169mil|Location2.Y=3623.853mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4043.588mil|Location2.X=4051.343mil|Location1.Y=3616.169mil|Location2.Y=3623.853mil|Absolute=True">Clearance Constraint: (0.1mm &lt; 0.102mm) Between Track (102.105mm,92.862mm)(103.132mm,91.835mm) on Top Layer And Track (102.632mm,91.872mm)(102.667mm,91.872mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.162mil|Location2.X=4043.838mil|Location1.Y=3632.044mil|Location2.Y=3635.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.162mil|Location2.X=4043.838mil|Location1.Y=3632.044mil|Location2.Y=3635.72mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (102.105mm,92.862mm)(103.132mm,91.835mm) on Top Layer And Track (102.667mm,91.872mm)(102.667mm,94.539mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4099.117mil|Location2.X=4106.801mil|Location1.Y=3164.617mil|Location2.Y=3172.372mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4099.117mil|Location2.X=4106.801mil|Location1.Y=3164.617mil|Location2.Y=3172.372mil|Absolute=True">Clearance Constraint: (0.03mm &lt; 0.102mm) Between Track (102.362mm,78.791mm)(105.385mm,81.813mm) on Top Layer And Track (104.267mm,80.366mm)(105.054mm,81.153mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4134.162mil|Location2.X=4137.838mil|Location1.Y=3206.162mil|Location2.Y=3209.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4134.162mil|Location2.X=4137.838mil|Location1.Y=3206.162mil|Location2.Y=3209.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (102.362mm,78.791mm)(105.385mm,81.813mm) on Top Layer And Track (105.054mm,81.153mm)(105.054mm,86.589mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.173mil|Location2.X=3542.851mil|Location1.Y=3927.173mil|Location2.Y=3930.851mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3539.173mil|Location2.X=3542.851mil|Location1.Y=3927.173mil|Location2.Y=3930.851mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (88.617mm,99.797mm)(91.008mm,99.797mm) on Bottom Layer And Track (89.357mm,99.212mm)(91.263mm,101.118mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3545.162mil|Location2.X=3548.838mil|Location1.Y=3924.166mil|Location2.Y=3927.843mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3545.162mil|Location2.X=3548.838mil|Location1.Y=3924.166mil|Location2.Y=3927.843mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (88.617mm,99.797mm)(91.008mm,99.797mm) on Bottom Layer And Via (90.094mm,100.178mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3569.162mil|Location2.X=3572.838mil|Location1.Y=3481.162mil|Location2.Y=3484.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3569.162mil|Location2.X=3572.838mil|Location1.Y=3481.162mil|Location2.Y=3484.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (89.016mm,88.468mm)(91.897mm,88.468mm) on Top Layer And Track (90.703mm,84.328mm)(90.703mm,88.697mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.367mil|Location2.X=3573.633mil|Location1.Y=3484.867mil|Location2.Y=3490.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.367mil|Location2.X=3573.633mil|Location1.Y=3484.867mil|Location2.Y=3490.133mil|Absolute=True">Clearance Constraint: (0.026mm &lt; 0.102mm) Between Track (89.016mm,88.468mm)(91.897mm,88.468mm) on Top Layer And Track (90.703mm,88.697mm)(92.158mm,88.697mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3583.437mil|Location2.X=3587.114mil|Location1.Y=3971.829mil|Location2.Y=3975.506mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3583.437mil|Location2.X=3587.114mil|Location1.Y=3971.829mil|Location2.Y=3975.506mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (89.357mm,99.212mm)(91.263mm,101.118mm) on Bottom Layer And Via (91.438mm,100.559mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3566.162mil|Location2.X=3569.838mil|Location1.Y=3808.162mil|Location2.Y=3811.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3566.162mil|Location2.X=3569.838mil|Location1.Y=3808.162mil|Location2.Y=3811.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (90.576mm,96.774mm)(90.576mm,99.263mm) on Top Layer And Track (90.678mm,93.387mm)(90.678mm,97.053mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3566.162mil|Location2.X=3569.838mil|Location1.Y=3819.162mil|Location2.Y=3822.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3566.162mil|Location2.X=3569.838mil|Location1.Y=3819.162mil|Location2.Y=3822.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (90.576mm,96.774mm)(90.576mm,99.263mm) on Top Layer And Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.162mil|Location2.X=3571.838mil|Location1.Y=3808.162mil|Location2.Y=3811.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3568.162mil|Location2.X=3571.838mil|Location1.Y=3808.162mil|Location2.Y=3811.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (90.576mm,96.774mm)(91.378mm,96.774mm) on Top Layer And Track (90.678mm,93.387mm)(90.678mm,97.053mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.367mil|Location2.X=3572.633mil|Location1.Y=3812.867mil|Location2.Y=3818.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.367mil|Location2.X=3572.633mil|Location1.Y=3812.867mil|Location2.Y=3818.133mil|Absolute=True">Clearance Constraint: (0.076mm &lt; 0.102mm) Between Track (90.576mm,96.774mm)(91.378mm,96.774mm) on Top Layer And Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3594.927mil|Location2.X=3600.193mil|Location1.Y=3812.867mil|Location2.Y=3818.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3594.927mil|Location2.X=3600.193mil|Location1.Y=3812.867mil|Location2.Y=3818.133mil|Absolute=True">Clearance Constraint: (0.076mm &lt; 0.102mm) Between Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer And Track (91.378mm,96.392mm)(91.378mm,96.774mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.242mil|Location2.X=3619.919mil|Location1.Y=3819.162mil|Location2.Y=3822.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.242mil|Location2.X=3619.919mil|Location1.Y=3819.162mil|Location2.Y=3822.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer And Track (91.947mm,96.839mm)(91.947mm,99.72mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3615.448mil|Location2.X=3625.587mil|Location1.Y=3814.141mil|Location2.Y=3820.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3615.448mil|Location2.X=3625.587mil|Location1.Y=3814.141mil|Location2.Y=3820.976mil|Absolute=True">Clearance Constraint: (0.032mm &lt; 0.102mm) Between Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer And Track (91.947mm,96.839mm)(92.881mm,95.905mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.162mil|Location2.X=3619.838mil|Location1.Y=3490.162mil|Location2.Y=3493.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3616.162mil|Location2.X=3619.838mil|Location1.Y=3490.162mil|Location2.Y=3493.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (90.703mm,88.697mm)(92.158mm,88.697mm) on Top Layer And Track (91.897mm,88.468mm)(91.897mm,89.027mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3598.093mil|Location2.X=3601.771mil|Location1.Y=3968.182mil|Location2.Y=3971.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3598.093mil|Location2.X=3601.771mil|Location1.Y=3968.182mil|Location2.Y=3971.858mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.263mm,101.118mm)(93.726mm,101.118mm) on Bottom Layer And Via (91.438mm,100.559mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.149mil|Location2.X=3641.827mil|Location1.Y=3294.173mil|Location2.Y=3297.851mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3638.149mil|Location2.X=3641.827mil|Location1.Y=3294.173mil|Location2.Y=3297.851mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.313mm,83.719mm)(97.993mm,83.719mm) on Top Layer And Track (91.565mm,84.609mm)(93.153mm,83.021mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3683.162mil|Location2.X=3686.838mil|Location1.Y=3903.162mil|Location2.Y=3906.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3683.162mil|Location2.X=3686.838mil|Location1.Y=3903.162mil|Location2.Y=3906.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (93.599mm,97.536mm)(93.599mm,99.645mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.173mil|Location2.X=3704.851mil|Location1.Y=3903.162mil|Location2.Y=3906.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.173mil|Location2.X=3704.851mil|Location1.Y=3903.162mil|Location2.Y=3906.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (93.599mm,99.645mm)(94.234mm,99.009mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.18mil|Location2.X=3711.856mil|Location1.Y=3899.659mil|Location2.Y=3903.336mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3708.18mil|Location2.X=3711.856mil|Location1.Y=3899.659mil|Location2.Y=3903.336mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (94.234mm,97.816mm)(94.234mm,99.009mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3682.367mil|Location2.X=3687.633mil|Location1.Y=3907.365mil|Location2.Y=3912.631mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3682.367mil|Location2.X=3687.633mil|Location1.Y=3907.365mil|Location2.Y=3912.631mil|Absolute=True">Clearance Constraint: (0.051mm &lt; 0.102mm) Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Via (93.599mm,99.974mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3618.133mil|Location2.X=3621.811mil|Location1.Y=3815.38mil|Location2.Y=3819.057mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3618.133mil|Location2.X=3621.811mil|Location1.Y=3815.38mil|Location2.Y=3819.057mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.851mm,97.053mm)(92.557mm,96.347mm) on Top Layer And Track (91.947mm,96.839mm)(91.947mm,99.72mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.301mil|Location2.X=3622.978mil|Location1.Y=3811.877mil|Location2.Y=3815.554mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.301mil|Location2.X=3622.978mil|Location1.Y=3811.877mil|Location2.Y=3815.554mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.851mm,97.053mm)(92.557mm,96.347mm) on Top Layer And Track (91.947mm,96.839mm)(92.881mm,95.905mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3620.502mil|Location2.X=3625.768mil|Location1.Y=3489.367mil|Location2.Y=3494.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3620.502mil|Location2.X=3625.768mil|Location1.Y=3489.367mil|Location2.Y=3494.633mil|Absolute=True">Clearance Constraint: (0.058mm &lt; 0.102mm) Between Track (91.897mm,88.468mm)(91.897mm,89.027mm) on Top Layer And Track (92.158mm,88.697mm)(92.869mm,89.408mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.367mil|Location2.X=3642.633mil|Location1.Y=3648.646mil|Location2.Y=3653.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.367mil|Location2.X=3642.633mil|Location1.Y=3648.646mil|Location2.Y=3653.912mil|Absolute=True">Clearance Constraint: (0.072mm &lt; 0.102mm) Between Track (91.932mm,92.081mm)(92.456mm,92.605mm) on Top Layer And Track (92.16mm,92.88mm)(93.156mm,92.88mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.155mil|Location2.X=3645.832mil|Location1.Y=3786.688mil|Location2.Y=3790.365mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3642.155mil|Location2.X=3645.832mil|Location1.Y=3786.688mil|Location2.Y=3790.365mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (91.947mm,96.839mm)(92.881mm,95.905mm) on Top Layer And Track (92.557mm,95.679mm)(92.557mm,96.347mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.367mil|Location2.X=3642.633mil|Location1.Y=3648.646mil|Location2.Y=3653.912mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.367mil|Location2.X=3642.633mil|Location1.Y=3648.646mil|Location2.Y=3653.912mil|Absolute=True">Clearance Constraint: (0.072mm &lt; 0.102mm) Between Track (92.16mm,92.88mm)(93.156mm,92.88mm) on Top Layer And Track (92.456mm,92.605mm)(92.881mm,92.605mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.296mil|Location2.X=3657.974mil|Location1.Y=3571.76mil|Location2.Y=3575.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.296mil|Location2.X=3657.974mil|Location1.Y=3571.76mil|Location2.Y=3575.436mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (92.253mm,90.16mm)(92.862mm,90.769mm) on Top Layer And Track (92.869mm,89.408mm)(92.869mm,91.323mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.432mil|Location2.X=3658.108mil|Location1.Y=3571.76mil|Location2.Y=3575.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654.432mil|Location2.X=3658.108mil|Location1.Y=3571.76mil|Location2.Y=3575.436mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (92.862mm,90.769mm)(93.523mm,90.769mm) on Top Layer And Track (92.869mm,89.408mm)(92.869mm,91.323mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3758.162mil|Location2.X=3761.838mil|Location1.Y=3463.162mil|Location2.Y=3466.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3758.162mil|Location2.X=3761.838mil|Location1.Y=3463.162mil|Location2.Y=3466.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (92.989mm,88.011mm)(96.495mm,88.011mm) on Bottom Layer And Track (95.504mm,86.614mm)(95.504mm,91.364mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3688.173mil|Location2.X=3691.851mil|Location1.Y=3971.168mil|Location2.Y=3974.845mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3688.173mil|Location2.X=3691.851mil|Location1.Y=3971.168mil|Location2.Y=3974.845mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.243mm,100.813mm)(93.98mm,100.813mm) on Bottom Layer And Track (93.726mm,101.016mm)(93.726mm,101.118mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.162mil|Location2.X=3699.838mil|Location1.Y=3967.173mil|Location2.Y=3970.851mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.162mil|Location2.X=3699.838mil|Location1.Y=3967.173mil|Location2.Y=3970.851mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.243mm,100.813mm)(93.98mm,100.813mm) on Bottom Layer And Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3711.744mil|Location2.X=3715.421mil|Location1.Y=3324.744mil|Location2.Y=3328.421mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3711.744mil|Location2.X=3715.421mil|Location1.Y=3324.744mil|Location2.Y=3328.421mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.65mm,83.82mm)(95.504mm,85.674mm) on Layer 2 And Track (94.325mm,77mm)(94.325mm,86.131mm) on Layer 2 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3697.662mil|Location2.X=3701.338mil|Location1.Y=3966.673mil|Location2.Y=3970.351mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3697.662mil|Location2.X=3701.338mil|Location1.Y=3966.673mil|Location2.Y=3970.351mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer And Track (93.98mm,100.813mm)(94.569mm,100.813mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3697.662mil|Location2.X=3701.338mil|Location1.Y=3966.673mil|Location2.Y=3970.351mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3697.662mil|Location2.X=3701.338mil|Location1.Y=3966.673mil|Location2.Y=3970.351mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer And Track (93.98mm,100.813mm)(97.231mm,97.562mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.296mil|Location2.X=3709.051mil|Location1.Y=3949.878mil|Location2.Y=3957.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.296mil|Location2.X=3709.051mil|Location1.Y=3949.878mil|Location2.Y=3957.562mil|Absolute=True">Clearance Constraint: (0.09mm &lt; 0.102mm) Between Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer And Via (93.599mm,99.974mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3720.162mil|Location2.X=3723.838mil|Location1.Y=3945.173mil|Location2.Y=3948.851mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3720.162mil|Location2.X=3723.838mil|Location1.Y=3945.173mil|Location2.Y=3948.851mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (93.98mm,100.813mm)(97.231mm,97.562mm) on Bottom Layer And Track (94.488mm,100.254mm)(94.869mm,100.254mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3729.108mil|Location2.X=3736.863mil|Location1.Y=3938.713mil|Location2.Y=3946.398mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3729.108mil|Location2.X=3736.863mil|Location1.Y=3938.713mil|Location2.Y=3946.398mil|Absolute=True">Clearance Constraint: (0.03mm &lt; 0.102mm) Between Track (93.98mm,100.813mm)(97.231mm,97.562mm) on Bottom Layer And Track (94.869mm,100.254mm)(95.352mm,99.771mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.695mil|Location2.X=3739.372mil|Location1.Y=3947.72mil|Location2.Y=3951.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.695mil|Location2.X=3739.372mil|Location1.Y=3947.72mil|Location2.Y=3951.396mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (94.488mm,100.254mm)(94.869mm,100.254mm) on Bottom Layer And Track (94.569mm,100.813mm)(97.231mm,98.15mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.695mil|Location2.X=3739.372mil|Location1.Y=3947.72mil|Location2.Y=3951.396mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.695mil|Location2.X=3739.372mil|Location1.Y=3947.72mil|Location2.Y=3951.396mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (94.569mm,100.813mm)(97.231mm,98.15mm) on Bottom Layer And Track (94.869mm,100.254mm)(95.352mm,99.771mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3763.162mil|Location2.X=3766.838mil|Location1.Y=3261.162mil|Location2.Y=3264.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3763.162mil|Location2.X=3766.838mil|Location1.Y=3261.162mil|Location2.Y=3264.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (95.656mm,80.645mm)(95.656mm,84.353mm) on Layer 2 And Via (95.606mm,82.88mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3321.403mil|Location2.Y=3325.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3321.403mil|Location2.Y=3325.081mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (95.656mm,84.353mm)(96.418mm,84.353mm) on Layer 2 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3355.905mil|Location2.Y=3359.582mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3355.905mil|Location2.Y=3359.582mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (95.758mm,85.573mm)(97.282mm,85.573mm) on Layer 1 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.162mil|Location2.X=3854.838mil|Location1.Y=3479.662mil|Location2.Y=3483.338mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.162mil|Location2.X=3854.838mil|Location1.Y=3479.662mil|Location2.Y=3483.338mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (95.844mm,88.671mm)(98.063mm,88.671mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.162mil|Location2.X=3829.838mil|Location1.Y=3615.162mil|Location2.Y=3618.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.162mil|Location2.X=3829.838mil|Location1.Y=3615.162mil|Location2.Y=3618.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (96.012mm,91.872mm)(100.813mm,91.872mm) on Bottom Layer And Track (97.231mm,88.925mm)(97.231mm,97.46mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3967.273mil|Location2.X=3970.95mil|Location1.Y=3612.156mil|Location2.Y=3615.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3967.273mil|Location2.X=3970.95mil|Location1.Y=3612.156mil|Location2.Y=3615.833mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (96.012mm,91.872mm)(100.813mm,91.872mm) on Bottom Layer And Via (100.838mm,91.186mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3326.403mil|Location2.Y=3330.081mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.162mil|Location2.X=3797.838mil|Location1.Y=3326.403mil|Location2.Y=3330.081mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (96.418mm,84.353mm)(96.418mm,84.607mm) on Layer 2 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.162mil|Location2.X=3854.838mil|Location1.Y=3470.162mil|Location2.Y=3473.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3851.162mil|Location2.X=3854.838mil|Location1.Y=3470.162mil|Location2.Y=3473.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (96.672mm,88.189mm)(105.537mm,88.189mm) on Bottom Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3858.894mil|Location2.X=3862.57mil|Location1.Y=3539.162mil|Location2.Y=3542.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3858.894mil|Location2.X=3862.57mil|Location1.Y=3539.162mil|Location2.Y=3542.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (96.774mm,89.941mm)(98.069mm,89.941mm) on Top Layer And Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.367mil|Location2.X=3869.633mil|Location1.Y=3538.367mil|Location2.Y=3543.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.367mil|Location2.X=3869.633mil|Location1.Y=3538.367mil|Location2.Y=3543.633mil|Absolute=True">Clearance Constraint: (0.102mm &lt; 0.102mm) Between Track (96.774mm,89.941mm)(98.069mm,89.941mm) on Top Layer And Track (98.374mm,88.48mm)(98.374mm,90.962mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.296mil|Location2.X=3856.972mil|Location1.Y=3468.028mil|Location2.Y=3471.704mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.296mil|Location2.X=3856.972mil|Location1.Y=3468.028mil|Location2.Y=3471.704mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Track (97.866mm,88.189mm)(98.069mm,88.392mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3861.296mil|Location2.X=3864.972mil|Location1.Y=3476.028mil|Location2.Y=3479.704mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3861.296mil|Location2.X=3864.972mil|Location1.Y=3476.028mil|Location2.Y=3479.704mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Track (98.069mm,88.392mm)(98.069mm,89.941mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.296mil|Location2.X=3856.972mil|Location1.Y=3468.028mil|Location2.Y=3471.704mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.296mil|Location2.X=3856.972mil|Location1.Y=3468.028mil|Location2.Y=3471.704mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3858.233mil|Location2.X=3863.499mil|Location1.Y=3482.867mil|Location2.Y=3488.133mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3858.233mil|Location2.X=3863.499mil|Location1.Y=3482.867mil|Location2.Y=3488.133mil|Absolute=True">Clearance Constraint: (0.076mm &lt; 0.102mm) Between Track (97.866mm,88.189mm)(98.069mm,88.392mm) on Top Layer And Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3859.028mil|Location2.X=3862.704mil|Location1.Y=3489.162mil|Location2.Y=3492.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3859.028mil|Location2.X=3862.704mil|Location1.Y=3489.162mil|Location2.Y=3492.838mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer And Track (98.069mm,88.392mm)(98.069mm,89.941mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3855.028mil|Location2.X=3858.704mil|Location1.Y=3479.662mil|Location2.Y=3483.338mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3855.028mil|Location2.X=3858.704mil|Location1.Y=3479.662mil|Location2.Y=3483.338mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.367mil|Location2.X=3869.633mil|Location1.Y=3480.831mil|Location2.Y=3486.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.367mil|Location2.X=3869.633mil|Location1.Y=3480.831mil|Location2.Y=3486.097mil|Absolute=True">Clearance Constraint: (0.102mm &lt; 0.102mm) Between Track (98.069mm,88.392mm)(98.069mm,89.941mm) on Top Layer And Track (98.374mm,88.48mm)(98.374mm,90.962mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3861.162mil|Location2.X=3864.838mil|Location1.Y=3475.894mil|Location2.Y=3479.57mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3861.162mil|Location2.X=3864.838mil|Location1.Y=3475.894mil|Location2.Y=3479.57mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (98.374mm,88.48mm)(98.374mm,90.962mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3975.162mil|Location2.X=3978.838mil|Location1.Y=3645.265mil|Location2.Y=3648.943mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3975.162mil|Location2.X=3978.838mil|Location1.Y=3645.265mil|Location2.Y=3648.943mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.102mm) Between Track (99.939mm,92.715mm)(101.221mm,92.715mm) on Top Layer And Via (101.016mm,92.558mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDU205XZEVKVKLRPT40PB2AMOHBDJSO3BD3RGUEWJ1UWZAKD0ZUJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Short-Circuit Constraint (Allowed=No) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3969.738mil|Location2.X=3984.262mil|Location1.Y=3642.946mil|Location2.Y=3657.47mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3969.738mil|Location2.X=3984.262mil|Location1.Y=3642.946mil|Location2.Y=3657.47mil|Absolute=True">Short-Circuit Constraint: Between Track (101.016mm,92.558mm)(101.016mm,93.091mm) on Top Layer And Track (99.939mm,92.715mm)(101.221mm,92.715mm) on Top Layer Location : [X = 101.016mm][Y = 92.715mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.303mil|Location2.X=4008.369mil|Location1.Y=3625.65mil|Location2.Y=3659.715mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.303mil|Location2.X=4008.369mil|Location1.Y=3625.65mil|Location2.Y=3659.715mil|Absolute=True">Short-Circuit Constraint: Between Track (101.221mm,92.715mm)(102.26mm,91.676mm) on Top Layer And Via (101.016mm,92.558mm) from Top Layer to Bottom Layer Location : [X = 101.38mm][Y = 92.524mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4022.738mil|Location2.X=4037.262mil|Location1.Y=3156.738mil|Location2.Y=3171.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4022.738mil|Location2.X=4037.262mil|Location1.Y=3156.738mil|Location2.Y=3171.262mil|Absolute=True">Short-Circuit Constraint: Between Track (101.346mm,80.366mm)(104.267mm,80.366mm) on Top Layer And Track (102.362mm,78.791mm)(102.362mm,81.661mm) on Top Layer Location : [X = 102.362mm][Y = 80.366mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.853mil|Location2.X=4104.147mil|Location1.Y=3151.853mil|Location2.Y=3176.147mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4079.853mil|Location2.X=4104.147mil|Location1.Y=3151.853mil|Location2.Y=3176.147mil|Absolute=True">Short-Circuit Constraint: Between Track (101.346mm,80.366mm)(104.267mm,80.366mm) on Top Layer And Track (102.362mm,78.791mm)(105.385mm,81.813mm) on Top Layer Location : [X = 103.937mm][Y = 80.366mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4029.853mil|Location2.X=4054.147mil|Location1.Y=3621.735mil|Location2.Y=3646.029mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4029.853mil|Location2.X=4054.147mil|Location1.Y=3621.735mil|Location2.Y=3646.029mil|Absolute=True">Short-Circuit Constraint: Between Track (102.105mm,92.862mm)(103.132mm,91.835mm) on Top Layer And Track (102.667mm,91.872mm)(102.667mm,94.539mm) on Top Layer Location : [X = 102.667mm][Y = 92.301mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4123.853mil|Location2.X=4148.147mil|Location1.Y=3195.853mil|Location2.Y=3220.147mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4123.853mil|Location2.X=4148.147mil|Location1.Y=3195.853mil|Location2.Y=3220.147mil|Absolute=True">Short-Circuit Constraint: Between Track (102.362mm,78.791mm)(105.385mm,81.813mm) on Top Layer And Track (105.054mm,81.153mm)(105.054mm,86.589mm) on Top Layer Location : [X = 105.054mm][Y = 81.483mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.865mil|Location2.X=3553.159mil|Location1.Y=3916.865mil|Location2.Y=3941.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3528.865mil|Location2.X=3553.159mil|Location1.Y=3916.865mil|Location2.Y=3941.159mil|Absolute=True">Short-Circuit Constraint: Between Track (88.617mm,99.797mm)(91.008mm,99.797mm) on Bottom Layer And Track (89.357mm,99.212mm)(91.263mm,101.118mm) on Bottom Layer Location : [X = 89.942mm][Y = 99.797mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.62mil|Location2.X=3571.38mil|Location1.Y=3904.633mil|Location2.Y=3953.392mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3522.62mil|Location2.X=3571.38mil|Location1.Y=3904.633mil|Location2.Y=3953.392mil|Absolute=True">Short-Circuit Constraint: Between Track (88.617mm,99.797mm)(91.008mm,99.797mm) on Bottom Layer And Via (90.094mm,100.178mm) from Top Layer to Bottom Layer Location : [X = 90.094mm][Y = 99.797mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3563.738mil|Location2.X=3578.262mil|Location1.Y=3475.738mil|Location2.Y=3490.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3563.738mil|Location2.X=3578.262mil|Location1.Y=3475.738mil|Location2.Y=3490.262mil|Absolute=True">Short-Circuit Constraint: Between Track (89.016mm,88.468mm)(91.897mm,88.468mm) on Top Layer And Track (90.703mm,84.328mm)(90.703mm,88.697mm) on Top Layer Location : [X = 90.703mm][Y = 88.468mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.134mil|Location2.X=3604.78mil|Location1.Y=3951.663mil|Location2.Y=3989.309mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3567.134mil|Location2.X=3604.78mil|Location1.Y=3951.663mil|Location2.Y=3989.309mil|Absolute=True">Short-Circuit Constraint: Between Track (89.357mm,99.212mm)(91.263mm,101.118mm) on Bottom Layer And Via (91.438mm,100.559mm) from Top Layer to Bottom Layer Location : [X = 91.083mm][Y = 100.85mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.704mil|Location2.X=3579.296mil|Location1.Y=3804.204mil|Location2.Y=3826.796mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3556.704mil|Location2.X=3579.296mil|Location1.Y=3804.204mil|Location2.Y=3826.796mil|Absolute=True">Short-Circuit Constraint: Between Track (90.576mm,96.774mm)(90.576mm,99.263mm) on Top Layer And Track (90.678mm,93.387mm)(90.678mm,97.053mm) on Top Layer Location : [X = 90.627mm][Y = 96.914mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3561.928mil|Location2.X=3574.072mil|Location1.Y=3814.928mil|Location2.Y=3827.072mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3561.928mil|Location2.X=3574.072mil|Location1.Y=3814.928mil|Location2.Y=3827.072mil|Absolute=True">Short-Circuit Constraint: Between Track (90.576mm,96.774mm)(90.576mm,99.263mm) on Top Layer And Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer Location : [X = 90.627mm][Y = 97.053mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3562.738mil|Location2.X=3577.262mil|Location1.Y=3802.738mil|Location2.Y=3817.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3562.738mil|Location2.X=3577.262mil|Location1.Y=3802.738mil|Location2.Y=3817.262mil|Absolute=True">Short-Circuit Constraint: Between Track (90.576mm,96.774mm)(91.378mm,96.774mm) on Top Layer And Track (90.678mm,93.387mm)(90.678mm,97.053mm) on Top Layer Location : [X = 90.678mm][Y = 96.774mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.959mil|Location2.X=3624.203mil|Location1.Y=3814.878mil|Location2.Y=3827.122mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3611.959mil|Location2.X=3624.203mil|Location1.Y=3814.878mil|Location2.Y=3827.122mil|Absolute=True">Short-Circuit Constraint: Between Track (90.678mm,97.053mm)(91.851mm,97.053mm) on Top Layer And Track (91.947mm,96.839mm)(91.947mm,99.72mm) on Top Layer Location : [X = 91.899mm][Y = 97.053mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3610.738mil|Location2.X=3625.262mil|Location1.Y=3484.738mil|Location2.Y=3499.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3610.738mil|Location2.X=3625.262mil|Location1.Y=3484.738mil|Location2.Y=3499.262mil|Absolute=True">Short-Circuit Constraint: Between Track (90.703mm,88.697mm)(92.158mm,88.697mm) on Top Layer And Track (91.897mm,88.468mm)(91.897mm,89.027mm) on Top Layer Location : [X = 91.897mm][Y = 88.697mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.009mil|Location2.X=3619.423mil|Location1.Y=3964.336mil|Location2.Y=3996.75mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3587.009mil|Location2.X=3619.423mil|Location1.Y=3964.336mil|Location2.Y=3996.75mil|Absolute=True">Short-Circuit Constraint: Between Track (91.263mm,101.118mm)(93.726mm,101.118mm) on Bottom Layer And Via (91.438mm,100.559mm) from Top Layer to Bottom Layer Location : [X = 91.522mm][Y = 101.106mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3627.841mil|Location2.X=3652.135mil|Location1.Y=3283.865mil|Location2.Y=3308.159mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3627.841mil|Location2.X=3652.135mil|Location1.Y=3283.865mil|Location2.Y=3308.159mil|Absolute=True">Short-Circuit Constraint: Between Track (91.313mm,83.719mm)(97.993mm,83.719mm) on Top Layer And Track (91.565mm,84.609mm)(93.153mm,83.021mm) on Top Layer Location : [X = 92.456mm][Y = 83.719mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.738mil|Location2.X=3692.262mil|Location1.Y=3897.738mil|Location2.Y=3912.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677.738mil|Location2.X=3692.262mil|Location1.Y=3897.738mil|Location2.Y=3912.262mil|Absolute=True">Short-Circuit Constraint: Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (93.599mm,97.536mm)(93.599mm,99.645mm) on Bottom Layer Location : [X = 93.599mm][Y = 99.187mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3690.865mil|Location2.X=3715.159mil|Location1.Y=3892.853mil|Location2.Y=3917.147mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3690.865mil|Location2.X=3715.159mil|Location1.Y=3892.853mil|Location2.Y=3917.147mil|Absolute=True">Short-Circuit Constraint: Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (93.599mm,99.645mm)(94.234mm,99.009mm) on Bottom Layer Location : [X = 94.057mm][Y = 99.187mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3705.655mil|Location2.X=3714.381mil|Location1.Y=3897.134mil|Location2.Y=3905.86mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3705.655mil|Location2.X=3714.381mil|Location1.Y=3897.134mil|Location2.Y=3905.86mil|Absolute=True">Short-Circuit Constraint: Between Track (91.618mm,99.187mm)(95.504mm,99.187mm) on Bottom Layer And Track (94.234mm,97.816mm)(94.234mm,99.009mm) on Bottom Layer Location : [X = 94.234mm][Y = 99.098mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3609.563mil|Location2.X=3630.381mil|Location1.Y=3806.743mil|Location2.Y=3827.561mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3609.563mil|Location2.X=3630.381mil|Location1.Y=3806.743mil|Location2.Y=3827.561mil|Absolute=True">Short-Circuit Constraint: Between Track (91.851mm,97.053mm)(92.557mm,96.347mm) on Top Layer And Track (91.947mm,96.839mm)(91.947mm,99.72mm) on Top Layer Location : [X = 91.947mm][Y = 96.956mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3609.89mil|Location2.X=3654.076mil|Location1.Y=3780.779mil|Location2.Y=3824.965mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3609.89mil|Location2.X=3654.076mil|Location1.Y=3780.779mil|Location2.Y=3824.965mil|Absolute=True">Short-Circuit Constraint: Between Track (91.851mm,97.053mm)(92.557mm,96.347mm) on Top Layer And Track (91.947mm,96.839mm)(92.881mm,95.905mm) on Top Layer Location : [X = 92.252mm][Y = 96.593mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3632.695mil|Location2.X=3655.294mil|Location1.Y=3776.302mil|Location2.Y=3798.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3632.695mil|Location2.X=3655.294mil|Location1.Y=3776.302mil|Location2.Y=3798.901mil|Absolute=True">Short-Circuit Constraint: Between Track (91.947mm,96.839mm)(92.881mm,95.905mm) on Top Layer And Track (92.557mm,95.679mm)(92.557mm,96.347mm) on Top Layer Location : [X = 92.557mm][Y = 96.205mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3646.759mil|Location2.X=3665.511mil|Location1.Y=3561.476mil|Location2.Y=3580.228mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3646.759mil|Location2.X=3665.511mil|Location1.Y=3561.476mil|Location2.Y=3580.228mil|Absolute=True">Short-Circuit Constraint: Between Track (92.253mm,90.16mm)(92.862mm,90.769mm) on Top Layer And Track (92.869mm,89.408mm)(92.869mm,91.323mm) on Top Layer Location : [X = 92.866mm][Y = 90.7mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.008mil|Location2.X=3663.532mil|Location1.Y=3566.336mil|Location2.Y=3580.86mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3649.008mil|Location2.X=3663.532mil|Location1.Y=3566.336mil|Location2.Y=3580.86mil|Absolute=True">Short-Circuit Constraint: Between Track (92.862mm,90.769mm)(93.523mm,90.769mm) on Top Layer And Track (92.869mm,89.408mm)(92.869mm,91.323mm) on Top Layer Location : [X = 92.869mm][Y = 90.769mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3752.738mil|Location2.X=3767.262mil|Location1.Y=3457.738mil|Location2.Y=3472.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3752.738mil|Location2.X=3767.262mil|Location1.Y=3457.738mil|Location2.Y=3472.262mil|Absolute=True">Short-Circuit Constraint: Between Track (92.989mm,88.011mm)(96.495mm,88.011mm) on Bottom Layer And Track (95.504mm,86.614mm)(95.504mm,91.364mm) on Bottom Layer Location : [X = 95.504mm][Y = 88.011mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.7mil|Location2.X=3692.323mil|Location1.Y=3970.695mil|Location2.Y=3975.318mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.7mil|Location2.X=3692.323mil|Location1.Y=3970.695mil|Location2.Y=3975.318mil|Absolute=True">Short-Circuit Constraint: Between Track (93.243mm,100.813mm)(93.98mm,100.813mm) on Bottom Layer And Track (93.726mm,101.016mm)(93.726mm,101.118mm) on Bottom Layer Location : [X = 93.726mm][Y = 100.914mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3685.678mil|Location2.X=3706.508mil|Location1.Y=3958.597mil|Location2.Y=3979.427mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3685.678mil|Location2.X=3706.508mil|Location1.Y=3958.597mil|Location2.Y=3979.427mil|Absolute=True">Short-Circuit Constraint: Between Track (93.243mm,100.813mm)(93.98mm,100.813mm) on Bottom Layer And Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer Location : [X = 93.881mm][Y = 100.813mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.435mil|Location2.X=3725.729mil|Location1.Y=3314.435mil|Location2.Y=3338.729mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3701.435mil|Location2.X=3725.729mil|Location1.Y=3314.435mil|Location2.Y=3338.729mil|Absolute=True">Short-Circuit Constraint: Between Track (93.65mm,83.82mm)(95.504mm,85.674mm) on Layer 2 And Track (94.325mm,77mm)(94.325mm,86.131mm) on Layer 2 Location : [X = 94.325mm][Y = 84.495mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.18mil|Location2.X=3710.582mil|Location1.Y=3960.285mil|Location2.Y=3977.687mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.18mil|Location2.X=3710.582mil|Location1.Y=3960.285mil|Location2.Y=3977.687mil|Absolute=True">Short-Circuit Constraint: Between Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer And Track (93.98mm,100.813mm)(94.569mm,100.813mm) on Bottom Layer Location : [X = 94.028mm][Y = 100.812mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.915mil|Location2.X=3732.085mil|Location1.Y=3935.927mil|Location2.Y=3980.097mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.915mil|Location2.X=3732.085mil|Location1.Y=3935.927mil|Location2.Y=3980.097mil|Absolute=True">Short-Circuit Constraint: Between Track (93.726mm,101.016mm)(94.488mm,100.254mm) on Bottom Layer And Track (93.98mm,100.813mm)(97.231mm,97.562mm) on Bottom Layer Location : [X = 94.234mm][Y = 100.534mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3713.492mil|Location2.X=3734.322mil|Location1.Y=3936.597mil|Location2.Y=3957.427mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3713.492mil|Location2.X=3734.322mil|Location1.Y=3936.597mil|Location2.Y=3957.427mil|Absolute=True">Short-Circuit Constraint: Between Track (93.98mm,100.813mm)(97.231mm,97.562mm) on Bottom Layer And Track (94.488mm,100.254mm)(94.869mm,100.254mm) on Bottom Layer Location : [X = 94.587mm][Y = 100.254mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3733.186mil|Location2.X=3741.212mil|Location1.Y=3945.21mil|Location2.Y=3953.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3733.186mil|Location2.X=3741.212mil|Location1.Y=3945.21mil|Location2.Y=3953.236mil|Absolute=True">Short-Circuit Constraint: Between Track (94.488mm,100.254mm)(94.869mm,100.254mm) on Bottom Layer And Track (94.569mm,100.813mm)(97.231mm,98.15mm) on Bottom Layer Location : [X = 94.925mm][Y = 100.31mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3729.249mil|Location2.X=3764.162mil|Location1.Y=3922.26mil|Location2.Y=3957.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3729.249mil|Location2.X=3764.162mil|Location1.Y=3922.26mil|Location2.Y=3957.173mil|Absolute=True">Short-Circuit Constraint: Between Track (94.569mm,100.813mm)(97.231mm,98.15mm) on Bottom Layer And Track (94.869mm,100.254mm)(95.352mm,99.771mm) on Bottom Layer Location : [X = 95.166mm][Y = 100.069mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.051mil|Location2.X=3792.949mil|Location1.Y=3236.051mil|Location2.Y=3289.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3739.051mil|Location2.X=3792.949mil|Location1.Y=3236.051mil|Location2.Y=3289.949mil|Absolute=True">Short-Circuit Constraint: Between Track (95.656mm,80.645mm)(95.656mm,84.353mm) on Layer 2 And Via (95.606mm,82.88mm) from Top Layer to Bottom Layer Location : [X = 95.656mm][Y = 82.88mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3781.327mil|Location2.X=3801.625mil|Location1.Y=3313.072mil|Location2.Y=3333.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3781.327mil|Location2.X=3801.625mil|Location1.Y=3313.072mil|Location2.Y=3333.37mil|Absolute=True">Short-Circuit Constraint: Between Track (95.656mm,84.353mm)(96.418mm,84.353mm) on Layer 2 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer Location : [X = 96.303mm][Y = 84.41mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.232mil|Location2.X=3814.768mil|Location1.Y=3349.5mil|Location2.Y=3387.035mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3777.232mil|Location2.X=3814.768mil|Location1.Y=3349.5mil|Location2.Y=3387.035mil|Absolute=True">Short-Circuit Constraint: Between Track (95.758mm,85.573mm)(97.282mm,85.573mm) on Layer 1 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer Location : [X = 96.418mm][Y = 85.554mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.896mil|Location2.X=3866.818mil|Location1.Y=3473.039mil|Location2.Y=3508.961mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.896mil|Location2.X=3866.818mil|Location1.Y=3473.039mil|Location2.Y=3508.961mil|Absolute=True">Short-Circuit Constraint: Between Track (95.844mm,88.671mm)(98.063mm,88.671mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer Location : [X = 97.761mm][Y = 88.671mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3820.738mil|Location2.X=3835.262mil|Location1.Y=3609.738mil|Location2.Y=3624.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3820.738mil|Location2.X=3835.262mil|Location1.Y=3609.738mil|Location2.Y=3624.262mil|Absolute=True">Short-Circuit Constraint: Between Track (96.012mm,91.872mm)(100.813mm,91.872mm) on Bottom Layer And Track (97.231mm,88.925mm)(97.231mm,97.46mm) on Bottom Layer Location : [X = 97.231mm][Y = 91.872mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.262mil|Location2.X=3973.988mil|Location1.Y=3606.16mil|Location2.Y=3621.887mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3958.262mil|Location2.X=3973.988mil|Location1.Y=3606.16mil|Location2.Y=3621.887mil|Absolute=True">Short-Circuit Constraint: Between Track (96.012mm,91.872mm)(100.813mm,91.872mm) on Bottom Layer And Via (100.838mm,91.186mm) from Top Layer to Bottom Layer Location : [X = 100.74mm][Y = 91.796mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3786.527mil|Location2.X=3805.473mil|Location1.Y=3318.747mil|Location2.Y=3337.694mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3786.527mil|Location2.X=3805.473mil|Location1.Y=3318.747mil|Location2.Y=3337.694mil|Absolute=True">Short-Circuit Constraint: Between Track (96.418mm,84.353mm)(96.418mm,84.607mm) on Layer 2 And Via (96.418mm,85.001mm) from Top Layer to Bottom Layer Location : [X = 96.418mm][Y = 84.537mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.051mil|Location2.X=3879.949mil|Location1.Y=3445.051mil|Location2.Y=3498.949mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.051mil|Location2.X=3879.949mil|Location1.Y=3445.051mil|Location2.Y=3498.949mil|Absolute=True">Short-Circuit Constraint: Between Track (96.672mm,88.189mm)(105.537mm,88.189mm) on Bottom Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer Location : [X = 97.866mm][Y = 88.189mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.47mil|Location2.X=3867.994mil|Location1.Y=3533.738mil|Location2.Y=3548.262mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.47mil|Location2.X=3867.994mil|Location1.Y=3533.738mil|Location2.Y=3548.262mil|Absolute=True">Short-Circuit Constraint: Between Track (96.774mm,89.941mm)(98.069mm,89.941mm) on Top Layer And Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer Location : [X = 98.063mm][Y = 89.941mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3847.69mil|Location2.X=3869.3mil|Location1.Y=3463.7mil|Location2.Y=3485.31mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3847.69mil|Location2.X=3869.3mil|Location1.Y=3463.7mil|Location2.Y=3485.31mil|Absolute=True">Short-Circuit Constraint: Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Track (97.866mm,88.189mm)(98.069mm,88.392mm) on Top Layer Location : [X = 98.006mm][Y = 88.252mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.27mil|Location2.X=3867.72mil|Location1.Y=3473.388mil|Location2.Y=3483.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3857.27mil|Location2.X=3867.72mil|Location1.Y=3473.388mil|Location2.Y=3483.838mil|Absolute=True">Short-Circuit Constraint: Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Track (98.069mm,88.392mm)(98.069mm,89.941mm) on Top Layer Location : [X = 98.107mm][Y = 88.357mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3827.321mil|Location2.X=3885.761mil|Location1.Y=3438.828mil|Location2.Y=3497.268mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3827.321mil|Location2.X=3885.761mil|Location1.Y=3438.828mil|Location2.Y=3497.268mil|Absolute=True">Short-Circuit Constraint: Between Track (97.281mm,87.387mm)(98.374mm,88.48mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer Location : [X = 97.956mm][Y = 88.088mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.026mil|Location2.X=3891.706mil|Location1.Y=3485.16mil|Location2.Y=3546.84mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.026mil|Location2.X=3891.706mil|Location1.Y=3485.16mil|Location2.Y=3546.84mil|Absolute=True">Short-Circuit Constraint: Between Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer And Track (98.069mm,88.392mm)(98.069mm,89.941mm) on Top Layer Location : [X = 98.066mm][Y = 89.306mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.846mil|Location2.X=3868.618mil|Location1.Y=3483.957mil|Location2.Y=3499.729mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3852.846mil|Location2.X=3868.618mil|Location1.Y=3483.957mil|Location2.Y=3499.729mil|Absolute=True">Short-Circuit Constraint: Between Track (98.063mm,88.671mm)(98.063mm,90.61mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer Location : [X = 98.063mm][Y = 88.693mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.126mil|Location2.X=3881.121mil|Location1.Y=3476.833mil|Location2.Y=3493.828mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3864.126mil|Location2.X=3881.121mil|Location1.Y=3476.833mil|Location2.Y=3493.828mil|Absolute=True">Short-Circuit Constraint: Between Track (98.374mm,88.48mm)(98.374mm,90.962mm) on Top Layer And Via (97.866mm,88.189mm) from Top Layer to Bottom Layer Location : [X = 98.365mm][Y = 88.527mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3950.147mil|Location2.X=3991.097mil|Location1.Y=3629.733mil|Location2.Y=3670.683mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3950.147mil|Location2.X=3991.097mil|Location1.Y=3629.733mil|Location2.Y=3670.683mil|Absolute=True">Short-Circuit Constraint: Between Track (99.939mm,92.715mm)(101.221mm,92.715mm) on Top Layer And Via (101.016mm,92.558mm) from Top Layer to Bottom Layer Location : [X = 100.854mm][Y = 92.715mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDAXH0DIBHGUVYE5ILEEM3RQYPVKSJC5MLOSPJPUOV5VZ5WDCKTV5H"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.338mil|Location2.X=3687.11mil|Location1.Y=3673.244mil|Location2.Y=3716.677mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3582.338mil|Location2.X=3687.11mil|Location1.Y=3673.244mil|Location2.Y=3716.677mil|Absolute=True">Un-Routed Net Constraint: Net 1V2 Between Pad C10-1(91.443mm,93.852mm) on Top Layer And Pad U3-B3(93.431mm,93.705mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3218.284mil|Location2.X=3860.338mil|Location1.Y=3503.992mil|Location2.Y=3784.512mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3218.284mil|Location2.X=3860.338mil|Location1.Y=3503.992mil|Location2.Y=3784.512mil|Absolute=True">Un-Routed Net Constraint: Net MOTOR_PWM Between Pad R11-2(82.296mm,89.453mm) on Top Layer And Pad U3-B15(97.831mm,95.905mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.89mil|Location2.X=4037.662mil|Location1.Y=3660.764mil|Location2.Y=3719.55mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.89mil|Location2.X=4037.662mil|Location1.Y=3660.764mil|Location2.Y=3719.55mil|Absolute=True">Un-Routed Net Constraint: Net I2C_SCL Between Pad U3-B14(97.831mm,94.255mm) on Top Layer And Pad R5-1(102.105mm,93.535mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3363.5mil|Location2.X=3730.418mil|Location1.Y=3810.37mil|Location2.Y=4091.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3363.5mil|Location2.X=3730.418mil|Location1.Y=3810.37mil|Location2.Y=4091.5mil|Absolute=True">Un-Routed Net Constraint: Net UART_TX Between Pad TX-1(86.614mm,102.743mm) on Top Layer [Unplated] And Pad U3-B23(94.531mm,97.005mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.622mil|Location2.X=3904mil|Location1.Y=3352.516mil|Location2.Y=3632.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.622mil|Location2.X=3904mil|Location1.Y=3352.516mil|Location2.Y=3632.936mil|Absolute=True">Un-Routed Net Constraint: Net SWDCLK Between Pad U3-A14(95.081mm,92.055mm) on Top Layer And Via (98.425mm,85.891mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3669.662mil|Location2.X=3773.724mil|Location1.Y=3615.488mil|Location2.Y=3762.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3669.662mil|Location2.X=3773.724mil|Location1.Y=3615.488mil|Location2.Y=3762.858mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Pad U3-B2(93.431mm,95.355mm) on Top Layer And Pad U3-A15(95.631mm,92.055mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3179.307mil|Location2.X=3687.11mil|Location1.Y=3753.796mil|Location2.Y=3806.164mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3179.307mil|Location2.X=3687.11mil|Location1.Y=3753.796mil|Location2.Y=3806.164mil|Absolute=True">Un-Routed Net Constraint: Net QSPI_CLK Between Pad U4-6(81.381mm,95.673mm) on Top Layer And Pad U3-B1(93.431mm,96.455mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654mil|Location2.X=3929.96mil|Location1.Y=3828mil|Location2.Y=3919.094mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3654mil|Location2.X=3929.96mil|Location1.Y=3828mil|Location2.Y=3919.094mil|Absolute=True">Un-Routed Net Constraint: Net 1V4 Between Track (94.869mm,100.254mm)(95.352mm,99.771mm) on Bottom Layer And Pad U3-B18(97.281mm,97.005mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3643.346mil|Location2.X=3897mil|Location1.Y=3545.866mil|Location2.Y=3673.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3643.346mil|Location2.X=3897mil|Location1.Y=3545.866mil|Location2.Y=3673.48mil|Absolute=True">Un-Routed Net Constraint: Net VBUS Between Pad U3-B7(95.081mm,92.605mm) on Top Layer And Track (96.114mm,90.766mm)(96.444mm,90.766mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3756.276mil|Location2.X=4049mil|Location1.Y=3362.516mil|Location2.Y=3654.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3756.276mil|Location2.X=4049mil|Location1.Y=3362.516mil|Location2.Y=3654.59mil|Absolute=True">Un-Routed Net Constraint: Net SWDIO Between Pad U3-B8(95.631mm,92.605mm) on Top Layer And Via (102.108mm,86.145mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2981mil|Location2.X=3181mil|Location1.Y=3568.054mil|Location2.Y=3768.054mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2981mil|Location2.X=3181mil|Location1.Y=3568.054mil|Location2.Y=3768.054mil|Absolute=True">Un-Routed Net Constraint: Net 3V3 Between Track (78.257mm,93.169mm)(78.293mm,93.133mm) on Top Layer And Track (78.257mm,93.169mm)(83.539mm,98.45mm) on Layer 1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.914mil|Location2.X=3542.914mil|Location1.Y=3236.086mil|Location2.Y=3449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.914mil|Location2.X=3542.914mil|Location1.Y=3236.086mil|Location2.Y=3449mil|Absolute=True">Un-Routed Net Constraint: Net B_GND Between Track (87.45mm,84.737mm)(87.45mm,84.836mm) on Top Layer And Track (87.45mm,84.737mm)(87.45mm,85.065mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=3770mil|Location1.Y=3763mil|Location2.Y=3963mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3570mil|Location2.X=3770mil|Location1.Y=3763mil|Location2.Y=3963mil|Absolute=True">Un-Routed Net Constraint: Net QSPI_IO2 Between Track (92.881mm,97.783mm)(93.218mm,98.12mm) on Top Layer And Track (88.519mm,98.12mm)(93.218mm,98.12mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660mil|Location2.X=3860mil|Location1.Y=3310mil|Location2.Y=3510mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Projects\SmartWatchFinalProject\SmartWatchFinalProject2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3660mil|Location2.X=3860mil|Location1.Y=3310mil|Location2.Y=3510mil|Absolute=True">Un-Routed Net Constraint: Net RST Between Track (95.504mm,85.674mm)(95.504mm,86.614mm) on Layer 2 And Track (95.504mm,86.614mm)(95.504mm,91.364mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
